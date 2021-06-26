@@ -102,7 +102,7 @@ class WizzairRegistration(unittest.TestCase):
         # Zarejestruj
         zarejestruj_btn = driver.find_element_by_xpath('//button[@class="base-button base-button--medium base-button--primary base-button--full-width"]')
         zarejestruj_btn.click()
-        sleep(1)
+        sleep(5)
 
     def tearDown(self):
         #zakonczenie testu

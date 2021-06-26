@@ -14,22 +14,23 @@ valid_country = 'Polska'
 
 
 class WizzairRegistration(unittest.TestCase):
-    #Warunki wstępne:
+    # Warunki wstępne:
     def setUp(self):
-        #1. Uruchomiona przeglądarka
+        # 1. Uruchomiona przeglądarka
         self.driver = webdriver.Chrome()
-        #2. Na stronie https://wizzair.com/pl-pl#/
+        # 2. Na stronie https://wizzair.com/pl-pl#/
         self.driver.get('https://wizzair.com/pl-pl#/')
         self.driver.maximize_window()
-        #wlaczenie implicity wait - mechanizm czekania na elementy
+        # wlaczenie implicity wait - mechanizm czekania na elementy
         self.driver.implicitly_wait(60)
 
-        #Przypadek testowy 001:
-        #Rejestracja przy użyciu błędnego adresu e-mail
+        # Przypadek testowy 001:
+        # Rejestracja przy użyciu błędnego adresu e-mail
+
     def testInvalidEmail(self):
-        #kroki
+        # kroki
         driver = self.driver
-        #Metoda odszuka element i zwraca WebElement
+        # Metoda odszuka element i zwraca WebElement
         # 1.Kliknij przycisk ZALOGUJ SIĘ
         zaloguj_btn = driver.find_element_by_xpath('//button[@data-test="navigation-menu-signin"]')
         zaloguj_btn.click()
@@ -65,7 +66,8 @@ class WizzairRegistration(unittest.TestCase):
         # 10. Wybierz narodowość
         wybierz_obywatelstwo = driver.find_element_by_xpath('//input[@data-test="booking-register-country"]')
         wybierz_obywatelstwo.click()
-        obywatelstwa = driver.find_elements_by_xpath('//div[@class="register-form__country-container__locations"]/label')
+        obywatelstwa = driver.find_elements_by_xpath(
+            '//div[@class="register-form__country-container__locations"]/label')
         # Iterujemy po liscie WebElementow
         for label in obywatelstwa:
             # szukamy wewnatrz WebElementu
@@ -74,25 +76,25 @@ class WizzairRegistration(unittest.TestCase):
             # print(option.get_attribute('innerText'))
             # jesli tekst elementu kraju to kraj ktory chcemy wybrac
             if option.get_attribute('innerText') == valid_country:
-            # Przewiń do tego kraju
+                # Przewiń do tego kraju
                 option.location_once_scrolled_into_view
                 # Kliknij w niego
                 option.click()
                 # Przerwij pętle
                 break
 
-        #UWAGA tutaj bedzie prawdziwy test
-        #wyszukuje wszystkie bledy
+        # UWAGA tutaj bedzie prawdziwy test
+        # wyszukuje wszystkie bledy
         error_messages = driver.find_elements_by_xpath('//span[@class="input-error__message"]/span')
-        #tworze liste widocznych bledow
+        # tworze liste widocznych bledow
         visible_error_notices = list()
         for error in error_messages:
             # jesli komunikat jest widoczny
             if error.is_displayed():
-                #dodajemy ten komunikat do listy widocznych
+                # dodajemy ten komunikat do listy widocznych
                 visible_error_notices.append(error)
-        #Sprawdzam czy lista widocznych komunikatow zawiera tylko jeden blad
-        #assercja czysty PYTHON
+        # Sprawdzam czy lista widocznych komunikatow zawiera tylko jeden blad
+        # assercja czysty PYTHON
         assert len(visible_error_notices) == 1, "liczba widocznych komunikatow nie zgadza sie"
         # Z wykorzystaniem unittest
         self.assertEqual(len(visible_error_notices), 1, msg="liczba widocznych komunikatow nie zgadza sie")
@@ -100,12 +102,13 @@ class WizzairRegistration(unittest.TestCase):
         self.assertEqual(visible_error_notices[0].text, "Nieprawidłowy adres e-mail")
 
         # Zarejestruj
-        zarejestruj_btn = driver.find_element_by_xpath('//button[@class="base-button base-button--medium base-button--primary base-button--full-width"]')
+        zarejestruj_btn = driver.find_element_by_xpath(
+            '//button[@class="base-button base-button--medium base-button--primary base-button--full-width"]')
         zarejestruj_btn.click()
         sleep(5)
 
     def tearDown(self):
-        #zakonczenie testu
+        # zakonczenie testu
         self.driver.quit()
 
 

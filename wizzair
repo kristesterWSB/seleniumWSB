@@ -1,0 +1,29 @@
+Scenariusz testowy:
+Rejestracja na stronie wizzair.com
+
+Przypadek testowy 001:
+Rejestracja przy użyciu błędnego adresu e-mail
+
+
+Warunki wstępne:
+1. Uruchomiona przeglądarka
+2. Na stronie https://wizzair.com/pl-pl#/
+3. Użytkownik niezalogowany
+
+Kroki:
+1. Kliknij przycisk ZALOGUJ SIĘ
+2. Kliknij REJESTRACJA
+3. Wpisz imię
+4. Wpisz nazwisko
+5. Wybierz płeć
+6. Wpisz kod kraju
+7. Wpisz nr telefonu
+8. Wpisz nieprawidłowy zdres e-mail (brak znku '@')
+9. Wpisz hasło
+10. Wybierz narodowość
+
+Oczekiwany rezultat:
+1. Użytkownik dostaje informację "Nieprawidłowy adres e-mail"
+
+Warunki końcowe:
+1. Konto nie zostaje założone

@@ -3,3 +3,5 @@ czlowiek.py
 geckodriver.log
 scratch
 sele.py
+__pycache__
+.venv
